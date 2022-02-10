@@ -1,6 +1,5 @@
 package it.uniroma3.siw.gestioneofficina.model;
 
-import jdk.jfr.Timestamp;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
