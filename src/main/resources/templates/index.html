@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body class="bb">
+<h1 class="autofficina">Autofficina</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+<div class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/register}">Registrati</a></li>
+    </ul>
+</div>
+<h1 style="text-align: center">Benvenuti nel portale per gestire un'officina</h1>
+<h2 style="text-align: center">All'interno dell'applicativo
+potrai trovare una serie di funzionalita per poter gestire al meglio l'officina e se sei un cliente potrai tenere sotto traccia tutti i tuoi interventi effettuati</h2>
+<ul>
+   <h3>Un'amministratore avrà la possibilità di</h3>
+    <li style="list-style-position: inside;">Aggiungere meccanici</li>
+    <li style="list-style-position: inside;">Aggiungere varie tipologie di interventi</li>
+    <li style="list-style-position: inside;">Inserire un intervento per un determinato cliente.</li>
+    <h3>Un cliente avrà la possibilita di</h3>
+    <li style="list-style-position: inside;">Visualizzare tutte le tipologie di interventi offerte dall'officina</li>
+    <li style="list-style-position: inside;">Visualizzare i propri interventi</li>
+    <li style="list-style-position: inside;">Generare una fattura riguardante tutti gli interventi completati</li>
+</ul>
+</body>
+</html>

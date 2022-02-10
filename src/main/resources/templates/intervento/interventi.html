@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+<h1 class="autofficina">Autofficina(Interventi)</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+<div th:if="${visitor.getRole().equals('ADMIN')}" class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li><a th:href="@{/tipologiainterventi}">TipologieInterventi</a></li>
+        <li><a th:href="@{/interventi}">Interventi</a></li>
+        <li><a th:href="@{/utenti}">AnagraficaClienti</a></li>
+        <li><a th:href="@{/meccanici}">Meccanici</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+<div th:if="${visitor.getRole().equals('CLIENTE')}" class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li><a th:href="@{/interventi}">InterventiEffettuati</a></li>
+        <li><a th:href="@{/tipologiainterventi}">TipologieOfferte</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+<div th:if="${interventi.size()==0 && visitor.getRole().equals('CLIENTE')}">
+    <h1>Al momento non sono presenti interventi effettuati</h1>
+</div>
+<div th:if="${interventi.size()}!=0" class="card-container">
+        <ul th:each="intervento : ${interventi}">
+            <li><a th:href="@{|/intervento/${intervento.getId()}/|}" th:text="'Intervento: ' + ${intervento.getTipologiaIntervento().getNome()}"></a></li>
+            <li><h4 th:text="'Descrizione: ' + ${intervento.getTipologiaIntervento().getDescrizione()}"></h4></li>
+            <li><h4 th:text="'€ ' +${intervento.getTipologiaIntervento().getCosto()}"></h4></li>
+        </ul>
+    <a th:href="@{/interventi/export/pdf}">Genera Fattura</a>
+</div>
+<div th:if="${visitor.getRole().equals('ADMIN')}" class="card-container">
+        <ul th:each="intervento : ${tutti}">
+            <li><a th:href="@{|/intervento/${intervento.getId()}/|}" th:text="'Intervento: ' + ${intervento.getTipologiaIntervento().getNome()}"></a></li>
+            <li><h4 th:text="'Descrizione: ' + ${intervento.getTipologiaIntervento().getDescrizione()}"></h4></li>
+            <li><h4 th:text="'€ ' + ${intervento.getTipologiaIntervento().getCosto()}"></h4></li>
+        </ul>
+    <div class="creaTipologia" th:if="${visitor.getRole().equals('ADMIN')}" style="margin-top: 300px">
+        <a th:href="@{/interventi/create}">Crea un nuovo Intervento</a>
+    </div>
+</div>
+</body>
+
+</html>

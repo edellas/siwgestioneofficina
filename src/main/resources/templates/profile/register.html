@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Registrazione</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body class="bb">
+<h1 class="autofficina">Autofficina(Registrazione)</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+    <div>
+        <h1>Registrazione</h1>
+    </div>
+    <div class="wrapper">
+        <ul>
+            <li><a th:href="@{/index}" >Home</a></li>
+            <li><a th:href="@{/login}">Login</a></li>
+            <li><a th:href="@{/register}">Registrati</a></li>
+        </ul>
+    </div>
+    <div th:if="${registered}">
+        <span>Congratulazioni ti sei registrato</span> <a th:href="@{/}">Torna alla home</a>
+    </div>
+    <div th:if="!${registered}">
+        <form th:action="@{/register}" method="post">
+            <div style="text-align: center">
+                <input type="text" name="username" th:field="${credentialsForm.userName}" th:placeholder="Username">
+                <div th:if="${#fields.hasErrors('credentialsForm.userName')}" th:errors="${credentialsForm.userName}"></div>
+            </div>
+            <div style="text-align: center">
+                <input type="text" name="firstName" th:field="${userForm.firstName}" th:placeholder="Nome" >
+                <div th:if="${#fields.hasErrors('userForm.firstName')}" th:errors="${userForm.firstName}"></div>
+            </div>
+            <div style="text-align: center">
+                <input type="text" name="lastName" th:field="${userForm.lastName}" th:placeholder="Cognome">
+                <div th:if="${#fields.hasErrors('userForm.lastName')}" th:errors="${userForm.lastName}"></div>
+            </div>
+            <div style="text-align: center">
+                <input type="password" id="password" name="password" th:field="${credentialsForm.password}" th:placeholder="Password">
+                <div th:if="${#fields.hasErrors('credentialsForm.password')}" th:errors="${credentialsForm.password}"></div>
+            </div>
+            <div style="text-align: center">
+                <input type="password" id="confirmPassword" th:field="${credentialsForm.confirmPassword}" th:placeholder="ConfermaPassword">
+                <div th:if="${#fields.hasErrors('credentialsForm.confirmPassword')}" th:errors="${credentialsForm.password}"></div>
+            </div>
+
+            <div style="text-align: center">
+                <button type="submit">Registrati</button>
+            </div>
+        </form>
+        <div style="text-align: center" class="t">
+            <a th:href="@{/login}">Sei gia un membro? Torna alla login</a>
+            <br><br>
+            <a th:href="@{/}">Torna indietro</a>
+        </div>
+    </div>
+<th:block th:fragment="scripts">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $('#password, #confirmPassword').on('keyup', function () {
+            if ($('#password').val() == $('#confirmPassword').val()) {
+                $('#confirmPassword').css('border-color', 'green');
+                $('#password').css('border-color', 'green');
+            } else {
+                $('#confirmPassword').css('border-color', 'red');
+                $('#password').css('border-color', 'red');
+            }
+        });
+    </script>
+</th:block>
+</body>
+</html>

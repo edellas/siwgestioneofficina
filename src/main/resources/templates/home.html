@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 20%;
+            margin: 50px;
+            background-color: #ffa347;
+            color: white;
+            display: inline-block;
+            margin: 100px;
+            border-radius: 30px;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+        .container {
+            padding: 40px 16px;
+        }
+    </style>
+</head>
+<body class="bb">
+
+<h1 class="autofficina">Autofficina</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+
+<div th:if="${credentialsVisitor.getRole().equals('ADMIN')}" class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li><a th:href="@{/tipologiainterventi}">TipologieInterventi</a></li>
+        <li><a th:href="@{/interventi}">Interventi</a></li>
+        <li><a th:href="@{/utenti}">AnagraficaClienti</a></li>
+        <li><a th:href="@{/meccanici}">Meccanici</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+
+<div th:if="${credentialsVisitor.getRole().equals('CLIENTE')}" class="wrapper" style="float: left">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li><a th:href="@{/interventi}">InterventiEffettuati</a></li>
+        <li><a th:href="@{/tipologiainterventi}">TipologieOfferte</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+
+<div th:if="${credentialsVisitor.getRole().equals('ADMIN')}">
+    <h1 th:text="'Benvenuto, ' + ${credentialsVisitor.getUserName()}"></h1>
+    <h3>Di seguito, un riassunto di tutte le tue attività</h3>
+    <div class="card">
+        <div class="container">
+            <h4><b>N° di Tipologie di interventi Inserite</b></h4>
+            <p th:text="${tipologie.size()}"></p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="container">
+            <h4><b>Tipologie Inserite</b></h4>
+            <p th:each="tipo : ${tipologie}" th:text="${tipo.descrizione}"></p>
+        </div>
+    </div>
+    <div>
+        <div class="card">
+            <div class="container">
+                <h4><b>Meccanici</b></h4>
+                <p th:each="meccanico : ${meccanici}" th:text="${meccanico.nome + ' ' + meccanico.cognome}"></p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="container">
+                <h4><b>N° Clienti</b></h4>
+                <p th:text="${clienti.size()}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:if="${credentialsVisitor.getRole().equals('CLIENTE')}">
+    <h1 th:text="'Benvenuto, ' + ${credentialsVisitor.getUserName()}"></h1>
+    <h3>Di seguito, un riassunto di tutte le tue attività</h3>
+    <div class="card">
+        <div class="container">
+            <h4><b>Tipologie Offerte</b></h4>
+            <p th:each="tipo : ${tipologie}" th:text="${tipo.descrizione}"></p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="container">
+            <h4><b>Interventi effettuati</b></h4>
+            <p th:each="intervento : ${interventi}" th:text="${intervento.tipologiaIntervento.nome + ' ' + intervento.tipologiaIntervento.descrizione}"></p>
+        </div>
+    </div>
+    <div>
+        <div class="card">
+            <div class="container">
+                <h4><b>N° Interventi</b></h4>
+                <p th:text="${interventi.size()}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

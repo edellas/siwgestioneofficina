@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title th:text="${editing} ? #{html.profile.edit.title(${tipologiainterventoForm.getNome()})} : #{html.profile.edit.title.create}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+<h1 class="autofficina">Autofficina(Modifica Profilo)</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+<div>
+    <h1 th:text="#{html.profile.edit.header(${userForm.getFirstName()})}"></h1>
+</div>
+<div th:if="${visitor.getRole().equals('ADMIN')}" class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li> <a th:href="@{/tipologiainterventi}">TipologieInterventi</a></li>
+        <li><a th:href="@{/interventi}">Interventi</a></li>
+        <li><a th:href="@{/utenti}">AnagraficaClienti</a></li>
+        <li><a th:href="@{/meccanici}">Meccanici</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+<div class="un">
+    <form th:action="@{|/profile/${credentials.getUserName()}/edit|}" method="post">
+        <div style="text-align: center">
+            <input type="text" id="name" name="name" th:field="${userForm.firstName}" th:placeholder="Nome">
+            <div th:if="${#fields.hasErrors('userForm.firstName')}" th:errors="${userForm.firstName}"></div>
+        </div>
+        <div style="text-align: center">
+            <input type="text" id="lastname" name="lastname" th:field="${userForm.lastName}" th:placeholder="Cognome">
+            <div th:if="${#fields.hasErrors('userForm.lastName')}" th:errors="${userForm.lastName}"></div>
+        </div>
+        <div style="text-align: center">
+            <button type="submit" th:text="#{html.profile.edit.submit.save}"></button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

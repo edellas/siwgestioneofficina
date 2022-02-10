@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title th:text="${editing} ? #{html.tipo.edit.title(${tipologiainterventoForm.getNome()})} : #{html.tipo.edit.title.create}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+<h1 class="autofficina">Autofficina(Tipologia Intervento)</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+    <div>
+        <h1 th:text="${editing} ? #{html.tipo.edit.header(${tipologiainterventoForm.getNome()})} : #{html.tipo.edit.header.create}"></h1>
+    </div>
+    <div th:if="${visitor.getRole().equals('ADMIN')}" class="wrapper">
+        <ul>
+            <li><a th:href="@{/index}" >Home</a></li>
+           <li> <a th:href="@{/tipologiainterventi}">TipologieInterventi</a></li>
+            <li><a th:href="@{/interventi}">Interventi</a></li>
+            <li><a th:href="@{/utenti}">AnagraficaClienti</a></li>
+            <li><a th:href="@{/meccanici}">Meccanici</a></li>
+            <li><a th:href="@{/profile}">Profilo</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="un">
+        <form th:action="${editing} ?  @{|/tipologiaintervento/${tipologiainterventoForm.getId()}/edit|} : @{|/tipologiainterventi/create|}" method="post">
+            <div style="text-align: center">
+                <input type="text" id="name" name="name" th:field="${tipologiainterventoForm.nome}" th:placeholder="Nome">
+                <div th:if="${#fields.hasErrors('tipologiainterventoForm.nome')}" th:errors="${tipologiainterventoForm.nome}"></div>
+            </div>
+            <div style="text-align: center">
+                <input type="text" id="descrizione" name="descrizione" th:field="${tipologiainterventoForm.descrizione}" th:placeholder="Descrizione">
+                <div th:if="${#fields.hasErrors('tipologiainterventoForm.descrizione')}" th:errors="${tipologiainterventoForm.descrizione}"></div>
+            </div>
+            <div style="text-align: center">
+
+                <input type="text" id="costo" name="costo" th:field="${tipologiainterventoForm.costo}" placeholder="Costo">
+            </div>
+            <div style="text-align: center">
+            <div th:if="${editing}">Per modificare una tipologia, modificare anche il codice</div>
+                <input type="text" id="codice" name="codice" th:field="${tipologiainterventoForm.codice}" placeholder="Codice">
+                <div th:if="${#fields.hasErrors('tipologiainterventoForm.codice')}" th:errors="${tipologiainterventoForm.codice}"></div>
+            </div>
+            <div style="text-align: center">
+                <button type="submit" th:text="${editing} ? #{html.tipo.edit.submit.save} : #{html.tipo.edit.submit.create}"></button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

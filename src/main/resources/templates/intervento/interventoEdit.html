@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title th:text="${editing} ? #{html.int.edit.title(${interventoForm.getTipologiaIntervento().getNome()})} : #{html.int.edit.title.create}"></title>
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+<h1 class="autofficina">Autofficina(Intervento)</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+  <div>
+    <h1 th:text="${editing} ? #{html.int.edit.header(${interventoForm.getTipologiaIntervento().getNome()})} : #{html.int.edit.header.create}"></h1>
+  </div>
+<div th:if="${visitor.getRole().equals('ADMIN')}" class="wrapper">
+  <ul>
+    <li><a th:href="@{/index}" >Home</a></li>
+    <li><a th:href="@{/tipologiainterventi}">TipologieInterventi</a></li>
+    <li><a th:href="@{/interventi}">Interventi</a></li>
+    <li><a th:href="@{/utenti}">AnagraficaClienti</a></li>
+    <li><a th:href="@{/meccanici}">Meccanici</a></li>
+    <li><a th:href="@{/profile}">Profilo</a></li>
+    <li><a th:href="@{/logout}">Logout</a></li>
+  </ul>
+</div>
+  <div class="un">
+    <form th:action="${editing} ?  @{|/intervento/${interventoForm.getId()}/edit|} : @{|/interventi/create|}" method="post">
+      <div style="text-align: center">
+        <select th:field="${interventoForm.tipologiaIntervento.id}" required>
+          <option value="" selected>----Selezione Tipologia----</option>
+          <option th:each="tipologia : ${listtipologie}" th:value="${tipologia.id}" th:text="${tipologia.nome}"></option>
+        </select>
+      </div>
+      <div style="text-align: center">
+        <select th:field="${interventoForm.cliente.id}" required>
+          <option value="" selected>----Seleziona Cliente----</option>
+          <option th:each="cliente : ${listclienti}" th:value="${cliente.id}" th:text="${cliente.firstName} + ${cliente.lastName}"></option>
+        </select>
+      </div>
+      <div style="text-align: center">
+        <select th:field="${interventoForm.meccanico.id}" required>
+          <option value="" selected>----Seleziona Meccanico----</option>
+          <option th:each="meccanico : ${listmeccanici}" th:value="${meccanico.id}" th:text="${meccanico.nome} + ${meccanico.cognome}"></option>
+        </select>
+      </div>
+      <div style="text-align: center">
+        Data di prenotazione per l'intervento
+        <input type="datetime-local" id="prenotazione" name="prenotazione" th:field="${interventoForm.dataPrenotazione}" placeholder="Data prenotazione" required>
+      </div>
+      <div style="text-align: center">
+        Data programmata per l'intervento
+        <input type="date" id="intervento" name="intervento" th:field="${interventoForm.dataIntervento}" placeholder="Data Intervento">
+      </div>
+      <div>
+
+      </div>
+      <div style="text-align: center">
+        <button type="submit" th:text="${editing} ? #{html.int.edit.submit.save} : #{html.int.edit.submit.create}"></button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

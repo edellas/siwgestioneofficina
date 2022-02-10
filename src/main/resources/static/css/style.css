@@ -1,0 +1,430 @@
+.vertical-menu {
+    width: 200px;
+    border-right: 5px solid #ffa347;
+    border-top: 5px solid #ffa347;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.autofficina{
+    border-bottom: 5px solid #ffa347;
+    text-align: center;
+    font-size: 60px;
+    font-style: italic;
+}
+
+.vertical-menu a {
+    background-color: white;
+    color: black;
+    font-size: x-large;
+    display: block;
+    padding: 60px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.vertical-menu a:hover {
+    background-color: #ffa347;
+}
+
+.tt{
+    text-align: center;
+    font-size: 60px;
+    font-style: italic;
+}
+
+.bb{
+    font-family: Poppins-Medium;
+    background-color: white;
+}
+
+.profile{
+    display: block;
+    horiz-align: center;
+    vertical-align: top;
+}
+
+.ta{
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.time{
+    display: block;
+    float: right;
+}
+
+.t{
+    text-align: center;
+    font-size: 20px;
+    font-style: italic;
+}
+
+h1.autofficina{
+    background-color: #ffa347;
+    padding: 0px;
+    margin-top: 0px;
+    color: white;
+}
+
+input, select{
+    background-color: #ffa347;
+    margin-top: 10px;
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    font-family: Poppins-Medium;
+    font-style: italic;
+    animation: 1s ease-out 0s 1 slideInFromUp;
+}
+
+input, select:focus{
+    border: none;
+    outline: none;
+}
+
+button{
+    background-color: white;
+    margin-top: 10px;
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    color: #ffa347;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    transition: transform .6s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+::placeholder{
+    color: white;
+}
+
+.creaTipologia{
+    position: center;
+    display: inline-block;
+    float: none;
+}
+
+.creaTipologia a{
+    text-decoration: none;
+    background-color: #ffa347;
+    padding: 14px 25px;
+    transition: 0.3s;
+    border-radius: 20px;
+    color: white;
+}
+.creaTipologia a:hover{
+    background-color: darkorange;
+}
+
+.tableTipologia{
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: 600px;
+}
+
+.tableTipologia thead tr {
+    background-color: #ffa347;
+    color: #ffffff;
+    text-align: left;
+}
+
+.tableTipologia th,
+.tableTipologia td {
+    padding: 12px 15px;
+}
+
+.tableTipologia tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.tableTipologia tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.tableTipologia tbody tr:last-of-type {
+    border-bottom: 2px solid #ffa347;
+}
+
+.tableTipologia tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.inte{
+    background-color: #ffa347;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Oswald', sans-serif;
+}
+.wrapper{
+    position: fixed;
+    top: 0;
+    /*left: -100%;*/
+    right: -100%;
+    height: 100%;
+    width: 100%;
+    background: #ffa347;
+    /*background: linear-gradient(90deg, #f92c78, #4114a1);*/
+    /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
+    /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);*/
+    transition: all 0.6s ease-in-out;
+}
+#active:checked ~ .wrapper{
+    /*left: 0;*/
+    right:0;
+}
+.menu-btn{
+    position: absolute;
+    z-index: 2;
+    right: 20px;
+    /*left: 20px; */
+    top: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    /*color: #fff;*/
+    /*background: linear-gradient(90deg, #f92c78, #4114a1);*/
+    /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
+    /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
+    transition: all 0.3s ease-in-out;
+}
+.menu-btn span,
+.menu-btn:before,
+.menu-btn:after{
+    content: "";
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 30%;
+    width: 40%;
+    border-bottom: 2px solid #000;
+    transition: transform .6s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.menu-btn:before{
+    transform: translateY(-8px);
+}
+.menu-btn:after{
+    transform: translateY(8px);
+}
+
+
+.close {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: background .6s;
+}
+
+/* closing animation */
+#active:checked + .menu-btn span {
+    transform: scaleX(0);
+}
+#active:checked + .menu-btn:before {
+    transform: rotate(45deg);
+    border-color: #fff;
+}
+#active:checked + .menu-btn:after {
+    transform: rotate(-45deg);
+    border-color: #fff;
+}
+.wrapper ul{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    height: 90%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+}
+.wrapper ul li{
+    height: 10%;
+    margin: 15px 0;
+}
+.wrapper ul li a{
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: 500;
+    padding: 5px 30px;
+    color: #fff;
+    border-radius: 50px;
+    position: absolute;
+    line-height: 50px;
+    margin: auto;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transition: transform .6s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.wrapper ul li a:after{
+    position: absolute;
+    content: "";
+    background: #fff;
+    /*background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);*/
+    /*background: linear-gradient(375deg, #1cc7d0, #2ede98);*/
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 50px;
+    transform: scaleY(0);
+    z-index: -1;
+    transition: transform 0.3s ease;
+}
+.wrapper ul li a:hover:after{
+    transform: scaleY(1);
+}
+.wrapper ul li a:hover{
+    color: #ffa347;
+}
+input[type="checkbox"]{
+    display: none;
+}
+.content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    text-align: center;
+    width: 100%;
+    color: #ffa347;
+}
+.content .title{
+    font-size: 40px;
+    font-weight: 700;
+}
+.content p{
+    font-size: 35px;
+    font-weight: 600;
+}
+
+#active:checked ~ .wrapper ul li a{
+    opacity: 1;
+}
+.wrapper ul li a{
+    transition: opacity 1.2s, transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translateX(100px);
+}
+#active:checked ~ .wrapper ul li a{
+    transform: none;
+    transition-timing-function: ease, cubic-bezier(.1,1.3,.3,1); /* easeOutBackを緩めた感じ */
+    transition-delay: .6s;
+    transform: translateX(-100px);
+}
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+h3 {
+    margin: 10px 0;
+}
+
+h6 {
+    margin: 5px 0;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+@keyframes slideInFromUp {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.card-container {
+    background-color: #ffa347;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.35);
+    color: white;
+    height: 900px;
+    text-align: center;
+    overflow: hidden;
+    animation: 1s ease-out 0s 1 slideInFromUp;
+}
+
+.card-container .pro {
+    color: #231E39;
+    background-color: #FEBB0B;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 7px;
+    top: 30px;
+    left: 30px;
+}
+
+.card-container img {
+    border: 1px solid #C400D7;
+    border-radius: 50%;
+    padding: 7px;
+    height: 150px;
+    width: 150px;
+}
+
+
+
+.skills {
+    background-color: darkorange;
+    text-align: left;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+.skills ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.skills ul li {
+    border: 1px solid #2D2747;
+    border-radius: 2px;
+    display: inline-block;
+    font-size: 12px;
+    margin: 0 7px 7px 0;
+    padding: 7px;
+}
+
+

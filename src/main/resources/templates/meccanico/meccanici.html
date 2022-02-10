@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+<h1 class="autofficina">Autofficina(Meccanici)</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+<div th:if="${visitor.getRole().equals('ADMIN')}" class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li><a th:href="@{/tipologiainterventi}">TipologieInterventi</a></li>
+        <li><a th:href="@{/interventi}">Interventi</a></li>
+        <li><a th:href="@{/utenti}">AnagraficaClienti</a></li>
+        <li><a th:href="@{/meccanici}">Meccanici</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+<div class="card-container">
+        <div th:each="meccanico : ${meccanici}" class="skills">
+            <a th:href="@{|/meccanico/${meccanico.getId()}/|}" th:text="${meccanico.getNome()}"></a>
+            <h6 th:text="${meccanico.getCognome()}"></h6>
+        </div>
+    <div class="creaTipologia" style="margin-top: 200px">
+        <a th:href="@{/meccanici/create}">Aggiungi un meccanico</a>
+    </div>
+</div>
+</body>
+
+</html>

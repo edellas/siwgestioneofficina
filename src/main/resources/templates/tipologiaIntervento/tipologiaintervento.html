@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body class="bb">
+<h1 class="autofficina">Autofficina(Tipologia Intervento)</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+
+<div th:if="${visitor.getRole().equals('ADMIN')}" class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+       <li><a th:href="@{/tipologiainterventi}">TipologieInterventi</a></li>
+        <li><a th:href="@{/interventi}">Interventi</a></li>
+        <li><a th:href="@{/utenti}">AnagraficaClienti</a></li>
+        <li><a th:href="@{/meccanici}">Meccanici</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+<div th:if="${visitor.getRole().equals('CLIENTE')}" class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li><a th:href="@{/interventi}">InterventiEffettuati</a></li>
+        <li><a th:href="@{/tipologiainterventi}">TipologieOfferte</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+
+    <div class="card-container">
+        <h3 th:text="${tipologiaintervento.getNome()}"></h3>
+        <h6 th:text="${tipologiaintervento.getDescrizione()}"></h6>
+        <div class="skills">
+                <h6 th:text="Nome + ': ' + ${tipologiaintervento.getNome()}"></h6>
+                <h6 th:text="Descrizione + ': ' + ${tipologiaintervento.getDescrizione()}"></h6>
+                <h6 th:text="Codice + ': ' + ${tipologiaintervento.getCodice()}"></h6>
+                <h6 th:text="'€' + ${tipologiaintervento.getCosto()}"></h6>
+        </div>
+        <div th:if="${visitor.getRole().equals('ADMIN')}">
+            <a th:href="@{|/tipologiaintervento/${tipologiaintervento.getId()}/edit|}"><i></i> <span>Modifica Tipologia</span></a>
+        </div>
+    </div>
+</body>
+</html>

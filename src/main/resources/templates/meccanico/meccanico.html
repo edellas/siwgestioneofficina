@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body class="bb">
+<h1 class="autofficina">Autofficina(Meccanico)</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+
+<div th:if="${visitor.getRole().equals('ADMIN')}" class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li><a th:href="@{/tipologiainterventi}">TipologieInterventi</a></li>
+        <li><a th:href="@{/interventi}">Interventi</a></li>
+        <li><a th:href="@{/utenti}">AnagraficaClienti</a></li>
+        <li><a th:href="@{/meccanici}">Meccanici</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+
+<div class="card-container">
+    <h6 th:text="${meccanico.getNome()}"></h6>
+    <h6 th:text="${meccanico.getCognome()}"></h6>
+    <a th:href="@{|/meccanico/${meccanico.getId()}/edit|}"><i></i> <span>Modifica Meccanico</span></a>
+        <div class="skills">
+            <h6 th:if="${meccanico.getInterventiMeccanico().size()==0}">Questo meccanico non ha ancora nessun intervento in programma</h6>
+            <ul th:if="${meccanico.getInterventiMeccanico()!=0}" th:each="intervento : ${meccanico.getInterventiMeccanico()}">
+                <h6 style="color: black" th:text="${intervento.getTipologiaIntervento().nome}"></h6>
+                <h6 style="color: black" th:text="${intervento.getTipologiaIntervento().descrizione}"></h6>
+                <li style="border: none">
+                    <h6 th:text="'Codice: ' + ${intervento.getTipologiaIntervento().codice}"></h6>
+
+                    <h6 th:text="'€ ' + ${intervento.getTipologiaIntervento().costo}"></h6>
+                    <h6 th:text="'Cliente: ' + ${intervento.getCliente().firstName} + ' ' +  ${intervento.getCliente().lastName}"></h6>
+                </li>
+            </ul>
+        </div>
+</div>
+</body>
+</html>

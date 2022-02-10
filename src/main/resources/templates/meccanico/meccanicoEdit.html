@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title th:text="${editing} ? #{html.mec.edit.title(${meccanicoForm.getNome()})} : #{html.mec.edit.title.create}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+<h1 class="autofficina">Autofficina(Meccanico)</h1>
+<input type="checkbox" id="active">
+<label for="active" class="menu-btn"><span></span></label>
+<label for="active" class="close"></label>
+    <div>
+        <h1 th:text="${editing} ? #{html.mec.edit.header(${meccanicoForm.getNome()})} : #{html.mec.edit.header.create}"></h1>
+    </div>
+<div th:if="${visitor.getRole().equals('ADMIN')}" class="wrapper">
+    <ul>
+        <li><a th:href="@{/index}" >Home</a></li>
+        <li> <a th:href="@{/tipologiainterventi}">TipologieInterventi</a></li>
+        <li><a th:href="@{/interventi}">Interventi</a></li>
+        <li><a th:href="@{/utenti}">AnagraficaClienti</a></li>
+        <li><a th:href="@{/meccanici}">Meccanici</a></li>
+        <li><a th:href="@{/profile}">Profilo</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</div>
+    <div class="un">
+        <form th:action="${editing} ?  @{|/meccanico/${meccanicoForm.getId()}/edit|} : @{|/meccanici/create|}" method="post">
+            <div style="text-align: center">
+                <input type="text" id="name" name="name" th:field="${meccanicoForm.nome}" th:placeholder="Nome">
+                <div th:if="${#fields.hasErrors('meccanicoForm.nome')}" th:errors="${meccanicoForm.nome}"></div>
+            </div>
+            <div style="text-align: center">
+                <input type="text" id="cognome" name="cognome" th:field="${meccanicoForm.cognome}" th:placeholder="Cognome">
+                <div th:if="${#fields.hasErrors('meccanicoForm.cognome')}" th:errors="${meccanicoForm.cognome}"></div>
+            </div>
+            <div style="text-align: center">
+                <button type="submit" th:text="${editing} ? #{html.mec.edit.submit.save} : #{html.mec.edit.submit.create}"></button>
+                <div th:if="${#fields.hasErrors('meccanicoForm.nome')}" th:errors="${meccanicoForm.nome}"></div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
